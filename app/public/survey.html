@@ -201,14 +201,10 @@
         console.log(newSubmission);
 
         $.post("/api/friends", newSubmission, function (data) {
-            if(data) {
-                alert("You are all set!");
-            }
             
         });
 
         $.get("api/friends", function(response) {
-            console.log(response);
 
             var matchAmount = 0;
             var highMatch = 0;
@@ -219,9 +215,7 @@
                 matchAmount = 0;
             for(var i = 0; i < response[0].scores.length; i++) {
                 matchAmount += Math.abs(newSubmission.scores[i] - response[v].scores[i]);
-                
             }
-                console.log("User: " + v)
                 if(v === 0) {
                     highMatch = matchAmount;
                 }
@@ -229,12 +223,9 @@
                     matchedIndex = v;
                     highMatch = matchAmount;
                 }
-                console.log("Match Amount: " + matchAmount);
-                console.log("High Match: " + highMatch);
             }
             $("#matchName").text(response[matchedIndex].name);
             $("#matchImage").attr("src", response[matchedIndex].photo);
-            console.log(matchedIndex);
         })
 
     });
